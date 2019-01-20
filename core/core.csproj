@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <LangVersion>7.2</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dawn.Guard" Version="1.7.0" />
+      <PackageReference Include="InfoViaLinq" Version="3.0.1" />
+      <PackageReference Include="LamarCompiler" Version="1.0.2" />
+    </ItemGroup>
+
+</Project>

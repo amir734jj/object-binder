@@ -1,0 +1,10 @@
+
+\.idea/
+
+core/bin/
+
+core/obj/
+
+core\.Tests/bin/
+
+core\.Tests/obj/
