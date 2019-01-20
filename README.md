@@ -6,6 +6,8 @@ Given a type X (maybe an interface or class) and type Y (has to be an interface)
 - getter will return value of bound property of X
 - setter will apply value change back to Y
 
+This library uses [Lamar Code Weaving](https://jasperfx.github.io/lamar/documentation/compilation/) for runtime IL generation and [Guard](https://github.com/safakgur/guard) for validation.
+
 ## How to use:
 Given class:
 ```csharp
