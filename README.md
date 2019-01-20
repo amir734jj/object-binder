@@ -51,7 +51,7 @@ Assert.Equals(sourceObj.Name, proxy.NameC);
 
 Runtime generated class:
 ```csharp
-class ICommon_proxy_0 : ICommon {
+public class ICommon_proxy_0 : ICommon {
     
     private readonly Entity _source = source;
     
