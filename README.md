@@ -49,6 +49,20 @@ proxy.NameC = "Something else...";
 Assert.Equals(sourceObj.Name, proxy.NameC);
 ```
 
+Runtime generated class:
+```csharp
+class ICommon_proxy_0 : ICommon {
+    
+    private readonly Entity _source = source;
+    
+    public ICommon_proxy_0(Entity source) { _source = source; }
+    
+    public string NameC { get { return _source.Name; } set { _source.Name = value; } }
+    
+    public bool AliveC { get { return _source.Alive; } set { _source.Alice = value; } }
+}
+```
+
 ## Note:
 This library is useful when we are dealing with a class with many many properties and we want to map it to another class with smaller set of properties where changes to simplified object properties will be applied back to original object properties.
 
