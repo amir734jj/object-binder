@@ -46,4 +46,8 @@ Assert.Equals(sourceObj.Name, proxy.NameC);
 ```
 
 ## Note:
-This library is useful when we are dealing with a class with many many properties and we want to map it to another class with smaller set of fields where changes to simplified object will be applied back to original object. 
+This library is useful when we are dealing with a class with many many properties and we want to map it to another class with smaller set of fields where changes to simplified object will be applied back to original object.
+
+## Credit:
+Special thanks to [@alexsniffin](https://github.com/alexsniffin) who came up with the original idea.
+
