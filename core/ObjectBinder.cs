@@ -62,6 +62,8 @@ namespace core
                               $@" get {{ return _source.{prop1.Name};  }} " +
                               $@" set {{ _source.{prop1.Name} = value; }} " +
                               "}");
+                    
+                    opt.BlankLine();
                 }
 
                 opt.FinishBlock(); // Finish the class
