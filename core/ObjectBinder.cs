@@ -17,7 +17,8 @@ namespace core
 
         public Type BoundType { get; }
 
-        public ObjectBinder(IDictionary<Expression<Func<TSource, object>>, Expression<Func<TCommon, object>>> map)
+        public ObjectBinder(IDictionary<Expression<Func<TSource, object>>, Expression<Func<TCommon, object>>> map,
+            Expression<Func<TCommon, TSource>> sourceRefExpr)
         {
             var sourceType = typeof(TSource);
             var commonType = typeof(TCommon);
@@ -28,6 +29,9 @@ namespace core
             var generator = new AssemblyGenerator();
             generator.ReferenceAssemblyContainingType<TSource>();
             generator.ReferenceAssemblyContainingType<TCommon>();
+
+            var sourceRefProperyName =
+                sourceRefExpr == null ? "SourceRef" : ResolveMemberExpression(sourceRefExpr).Name;
 
             var assembly = generator.Generate(opt =>
             {
@@ -54,17 +58,21 @@ namespace core
                     Guard.Argument((prop1, prop2))
                         .Require(x => x.Item1 != null)
                         .Require(x => x.Item2 != null)
-                        .Require(x => x.Item1.PropertyType == x.Item2.PropertyType, tuple =>
-                            $"Property types between {tuple.Item1.PropertyType} and {tuple.Item2.PropertyType} do not match");
+                        .Require(x => x.Item1.PropertyType == x.Item2.PropertyType,
+                            tuple =>
+                                $"Property types between {tuple.Item1.PropertyType} and {tuple.Item2.PropertyType} do not match");
 
                     opt.Write($"public {prop1.PropertyType.FullNameInCode()} {prop2.Name} " +
                               "{" +
                               $@" get {{ return _source.{prop1.Name};  }} " +
                               $@" set {{ _source.{prop1.Name} = value; }} " +
                               "}");
-                    
+
                     opt.BlankLine();
                 }
+
+                // SourceRef Property, no setter allowed!
+                opt.Write($"public {sourceType.FullNameInCode()} {sourceRefProperyName} {{ get => _source; }} ");
 
                 opt.FinishBlock(); // Finish the class
                 opt.FinishBlock(); // Finish the namespace
@@ -73,7 +81,7 @@ namespace core
             BoundType = assembly.GetExportedTypes().Single();
         }
 
-        private static PropertyInfo ResolveMemberExpression<T>(Expression<Func<T, object>> expression)
+        private static PropertyInfo ResolveMemberExpression<T, TProperty>(Expression<Func<T, TProperty>> expression)
         {
             var members = InfoViaLinq<T>.New().PropLambda(expression).Members().ToList();
 

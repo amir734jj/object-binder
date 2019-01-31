@@ -17,6 +17,8 @@ namespace core.Builders
     {
         private ImmutableDictionary<Expression<Func<TSource, object>>, Expression<Func<TCommon, object>>> _map;
 
+        private Expression<Func<TCommon, TSource>> _sourceRefExpr;
+
         public ObjectBinderBuilder()
         {
             _map = ImmutableDictionary<Expression<Func<TSource, object>>, Expression<Func<TCommon, object>>>.Empty;
@@ -28,10 +30,17 @@ namespace core.Builders
 
             return this;
         }
+        
+        public IObjectBinderBuilder<TSource, TCommon> SourceRef(Expression<Func<TCommon, TSource>> sourceRefExpr)
+        {
+            _sourceRefExpr = sourceRefExpr;
+
+            return this;
+        }
 
         public IObjectBinder Build()
         {
-            return new ObjectBinder<TSource, TCommon>(_map);
+            return new ObjectBinder<TSource, TCommon>(_map, _sourceRefExpr);
         }
     }
 }

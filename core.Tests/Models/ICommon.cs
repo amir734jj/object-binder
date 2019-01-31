@@ -5,5 +5,7 @@ namespace core.Tests.Models
         string NameC { get; set; }
 
         bool AliveC { get; set; }
+        
+        Entity SourceRef { get; }
     }
 }

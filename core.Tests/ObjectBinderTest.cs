@@ -17,6 +17,7 @@ namespace core.Tests
             _fixture = new Fixture();
 
             _boundType = ObjectBinderBuilder.New<Entity, ICommon>()
+                .SourceRef(x => x.SourceRef)
                 .Bind(x => x.Name, x => x.NameC)
                 .Bind(x => x.Alive, x => x.AliveC)
                 .Build()
@@ -33,6 +34,7 @@ namespace core.Tests
             // Act, Assert
             Assert.Equal(source.Name, proxy.NameC);
             Assert.Equal(source.Alive, proxy.AliveC);
+            Assert.Equal(source, proxy.SourceRef);
         }
         
         [Fact]
