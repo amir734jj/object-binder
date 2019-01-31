@@ -1,5 +1,7 @@
 # object-binder
 
+[Nuget](https://www.nuget.org/packages/ObjectBinder/)
+
 ## Description
 Given a type X (maybe an interface or class) and type Y (has to be an interface), this library will generate a type Z where it implements interface Y and take an instance of X in the constructor where for all properties:
 
