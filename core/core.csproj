@@ -3,6 +3,12 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>7.2</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>Glue together two types in runtime</Description>
+        <PackageProjectUrl>https://github.com/amir734jj/object-binder</PackageProjectUrl>
+        <Version>1.0.0</Version>
+        <PackageReleaseNotes>Working state!</PackageReleaseNotes>
+        <AssemblyName>ObjectBinder</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
