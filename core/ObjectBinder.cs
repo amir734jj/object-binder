@@ -90,7 +90,7 @@ namespace core
                 }
 
                 // If common type is not an interface, hence we need to add the properties, otherwise, they will be inherited
-                if (!commonType.IsInterface)
+                if (commonType.IsInterface)
                 {
                     // Add the rest of properties that do not needed be bound
                     foreach (var propertyInfo in commonType.GetProperties().Except(visitedCommonProperties))

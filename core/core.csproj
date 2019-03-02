@@ -6,8 +6,8 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Glue together two types in runtime</Description>
         <PackageProjectUrl>https://github.com/amir734jj/object-binder</PackageProjectUrl>
-        <Version>1.0.0</Version>
-        <PackageReleaseNotes>Working state</PackageReleaseNotes>
+        <Version>1.0.1</Version>
+        <PackageReleaseNotes>Fixed the bug where properties of class would get duplicated</PackageReleaseNotes>
         <AssemblyName>object-binder</AssemblyName>
         <RootNamespace>object-binder</RootNamespace>
     </PropertyGroup>
