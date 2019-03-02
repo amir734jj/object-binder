@@ -1,5 +1,7 @@
 # object-binder
 
+[Nuget](https://www.nuget.org/packages/ObjectBinder/)
+
 ## Description
 Given a type X (maybe an interface or class) and type Y (may to be an interface or class with virtual properties), this library will generate a type Z where it implements (or extend) Y and take an instance of X in the constructor where for all properties:
 
@@ -47,6 +49,20 @@ proxy.NameC = "Something else...";
 
 // Assert property change in `sourceObj`
 Assert.Equals(sourceObj.Name, proxy.NameC);
+```
+
+Runtime generated class:
+```csharp
+public class ICommon_proxy_0 : ICommon {
+    
+    private readonly Entity _source = source;
+    
+    public ICommon_proxy_0(Entity source) { _source = source; }
+    
+    public string NameC { get { return _source.Name; } set { _source.Name = value; } }
+    
+    public bool AliveC { get { return _source.Alive; } set { _source.Alice = value; } }
+}
 ```
 
 ## Note:

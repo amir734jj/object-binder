@@ -34,6 +34,8 @@ namespace core
 
             var visitedCommonProperties = ImmutableList<PropertyInfo>.Empty;
 
+            var (shadowField, constructorArg) = ("_sourceRef", "sourceRef");
+
             var assembly = assemblyGenerator.Generate(opt =>
             {
                 var className = $"{commonType.Name}_proxy_{_count++}";
@@ -44,12 +46,12 @@ namespace core
                 opt.StartClass(className, typeof(TCommon));
 
                 // Shadow field
-                opt.Write($"private readonly {sourceType.FullNameInCode()} _source;");
+                opt.Write($"private readonly {sourceType.FullNameInCode()} {shadowField};");
                 opt.BlankLine();
 
                 // Constructor
-                opt.Write($"BLOCK:public {className} ({sourceType.FullNameInCode()} source)");
-                opt.Write("_source = source;");
+                opt.Write($"BLOCK:public {className} ({sourceType.FullNameInCode()} {constructorArg})");
+                opt.Write($"{shadowField} = {constructorArg};");
                 opt.FinishBlock();
 
                 foreach (var (key, value) in map)
@@ -61,8 +63,9 @@ namespace core
                     Guard.Argument((prop1, prop2))
                         .Require(x => x.Item1 != null)
                         .Require(x => x.Item2 != null)
-                        .Require(x => x.Item1.PropertyType == x.Item2.PropertyType, tuple =>
-                            $"Property types between {tuple.Item1.PropertyType} and {tuple.Item2.PropertyType} do not match");
+                        .Require(x => x.Item1.PropertyType == x.Item2.PropertyType,
+                            tuple =>
+                                $"Property types between {tuple.Item1.PropertyType} and {tuple.Item2.PropertyType} do not match");
 
                     // If TCommon is not an interface and if property of common is virtual, then we can override it else
                     // it causes property duplication as overriding property is not possible
@@ -79,8 +82,8 @@ namespace core
                     opt.Write(
                         $"public {(needsOverride ? "override" : string.Empty)} {prop1.PropertyType.FullNameInCode()} {prop2.Name} " +
                         "{" +
-                        $@" get {{ return _source.{prop1.Name};  }} " +
-                        $@" set {{ _source.{prop1.Name} = value; }} " +
+                        $@" get {{ return {shadowField}.{prop1.Name};  }} " +
+                        $@" set {{ {shadowField}.{prop1.Name} = value; }} " +
                         "}");
 
                     opt.BlankLine();
@@ -98,7 +101,7 @@ namespace core
                         opt.BlankLine();
                     }
                 }
-
+                
                 opt.FinishBlock(); // Finish the class
                 opt.FinishBlock(); // Finish the namespace
             });
@@ -106,7 +109,7 @@ namespace core
             BoundType = assembly.GetExportedTypes().Single();
         }
 
-        private static PropertyInfo ResolveMemberExpression<T>(Expression<Func<T, object>> expression)
+        private static PropertyInfo ResolveMemberExpression<T, TProperty>(Expression<Func<T, TProperty>> expression)
         {
             var members = InfoViaLinq<T>.New().PropLambda(expression).Members().ToList();
 

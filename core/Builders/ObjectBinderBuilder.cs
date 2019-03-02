@@ -35,7 +35,7 @@ namespace core.Builders
         public IObjectBinderBuilder<TSource, TCommon> WithAssemblyGenerator(AssemblyGenerator assemblyGenerator)
         {
             _assemblyGenerator = assemblyGenerator;
-
+            
             return this;
         }
 
