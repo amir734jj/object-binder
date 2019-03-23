@@ -3,7 +3,7 @@
 [Nuget](https://www.nuget.org/packages/ObjectBinder/)
 
 ## Description
-Given a type X (maybe an interface or class) and type Y (may to be an interface or class with virtual properties), this library will generate a type Z where it implements (or extend) Y and take an instance of X in the constructor where for all properties:
+Given a type X (maybe an interface or class) and type Y (maybe an interface or class with virtual properties), this library will generate a type Z where it implements (or extend) Y and take an instance of X in the constructor where for all properties:
 
 - getter will return value of bound property of X
 - setter will apply value change back to Y
