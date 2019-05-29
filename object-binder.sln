@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core", "core\core.csproj", "{180D3C19-B148-4F4B-816D-D554703521B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MI.Object.Binder", "MI.Object.Binder\Object-Binder.csproj", "{180D3C19-B148-4F4B-816D-D554703521B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.Tests", "core.Tests\core.Tests.csproj", "{AD31EFA1-5F76-4560-97AA-7749F5564ABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MI.Object.Binder.Tests", "MI.Object.Binder.Tests\Object-Binder.Tests.csproj", "{AD31EFA1-5F76-4560-97AA-7749F5564ABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
 
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\core\core.csproj" />
+      <ProjectReference Include="..\MI.Object.Binder\Object-Binder.csproj" />
     </ItemGroup>
-
 </Project>
