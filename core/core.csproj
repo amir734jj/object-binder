@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetFramework>netcoreapp2.0</TargetFramework>
         <LangVersion>7.2</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Glue together two types in runtime</Description>
-        <PackageProjectUrl>https://git.nmlv.nml.com/HES8493/mi.object.binder</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/amir734jj/object-binder</PackageProjectUrl>
         <Version>1.0.1</Version>
         <PackageReleaseNotes>Fixed the bug where properties of class would get duplicated</PackageReleaseNotes>
         <AssemblyName>object-binder</AssemblyName>
